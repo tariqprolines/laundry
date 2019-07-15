@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+{% load static%}
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Laundry System | Dashboard</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static 'services/plugins/fontawesome-free/css/all.min.css'%}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bbootstrap 4 -->
+  <link rel="stylesheet" href="{% static 'services/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css'%}">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="{% static 'services/plugins/icheck-bootstrap/icheck-bootstrap.min.css'%}">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="{% static 'services/plugins/jqvmap/jqvmap.min.css'%}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'services/dist/css/adminlte.min.css'%}">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="{% static 'services/plugins/overlayScrollbars/css/OverlayScrollbars.min.css'%}">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="{% static 'services/plugins/daterangepicker/daterangepicker.css'%}">
+  <!-- summernote -->
+  <link rel="stylesheet" href="{% static 'services/plugins/summernote/summernote-bs4.css'%}">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{% static 'services/plugins/datatables/dataTables.bootstrap4.css' %}">
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light border-bottom">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{% url 'index'%}" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">Contact</a>
+      </li>
+    </ul>
+
+    <!-- SEARCH FORM -->
+    <form class="form-inline ml-3">
+      <div class="input-group input-group-sm">
+        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+        <div class="input-group-append">
+          <button class="btn btn-navbar" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <!-- Messages Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-comments"></i>
+          <span class="badge badge-danger navbar-badge">3</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <a href="#" class="dropdown-item">
+            <!-- Message Start -->
+            <div class="media">
+              <img src="{% static 'services/dist/img/user1-128x128.jpg' %}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  Brad Diesel
+                  <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">Call me whenever you can...</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div>
+            <!-- Message End -->
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <!-- Message Start -->
+            <div class="media">
+              <img src="{% static 'services/dist/img/user1-128x128.jpg' %}" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  John Pierce
+                  <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">I got your message bro</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div>
+            <!-- Message End -->
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <!-- Message Start -->
+            <div class="media">
+              <img src="{% static 'services/dist/img/user1-128x128.jpg' %}" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  Nora Silvester
+                  <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">The subject goes here</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div>
+            <!-- Message End -->
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+        </div>
+      </li>
+      <!-- Notifications Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-bell"></i>
+          <span class="badge badge-warning navbar-badge">15</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <span class="dropdown-item dropdown-header">15 Notifications</span>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-envelope mr-2"></i> 4 new messages
+            <span class="float-right text-muted text-sm">3 mins</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-users mr-2"></i> 8 friend requests
+            <span class="float-right text-muted text-sm">12 hours</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-file mr-2"></i> 3 new reports
+            <span class="float-right text-muted text-sm">2 days</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+        </div>
+      </li>
+
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="{% url 'dashboard'%}" class="brand-link">
+      <img src="{% static 'services/dist/img/logo.png' %}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+           style="opacity: .8">
+      <span class="brand-text font-weight-light">Laundry System</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{% static 'services/dist/img/user2-160x160.jpg' %}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">{{user.username}}</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item has-treeview menu-open">
+            <a href="{%url 'dashboard'%}" class="nav-link active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Dashboard
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Service Section
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'service-list'%}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Service List</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{%url 'add-service'%}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Service</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Customer Profile
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'customer-list' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Customer List</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'add-customer' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Customer</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Washerman Profile
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'fuller-list' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Fuller List</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'add-fuller' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Fuller</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="{% url 'assign-service'%}" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Assign Service
+              </p>
+            </a>
+
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Billing Section
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="pages/tables/simple.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Invoice List</p>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+
+          <li class="nav-item has-treeview">
+            <a href="{% url 'logout'%}" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Logout
+              </p>
+            </a>
+
+          </li>
+
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <section class="content-header">
+    {% if messages %}
+                   {% for message in messages %}
+                        <div class="alert alert-dismissible fade show {{ message.tags }}" role="alert">
+                           {{ message }}
+                           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </button>
+                        </div>
+                   {% endfor %}
+    {% endif %}
+    {%block container%}{%endblock%}
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2019 <a href="http://prolines.sa">Prolines.sa</a>.</strong>
+    All rights reserved.
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="{% static 'services/plugins/jquery/jquery.min.js'%}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="{% static 'services/plugins/jquery-ui/jquery-ui.min.js'%}"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'services/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- ChartJS -->
+<script src="{% static 'services/plugins/chart.js/Chart.min.js' %}"></script>
+<!-- Sparkline -->
+<script src="{% static 'services/plugins/sparklines/sparkline.js '%}"></script>
+<!-- JQVMap -->
+<script src="{% static 'services/plugins/jqvmap/jquery.vmap.min.js' %}"></script>
+<script src="{% static 'services/plugins/jqvmap/maps/jquery.vmap.world.js '%}"></script>
+<!-- jQuery Knob Chart -->
+<script src="{% static 'services/plugins/jquery-knob/jquery.knob.min.js' %}"></script>
+<!-- daterangepicker -->
+<script src="{% static 'services/plugins/moment/moment.min.js' %}"></script>
+<script src="{% static 'services/plugins/daterangepicker/daterangepicker.js' %}"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="{% static 'services/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+<!-- Summernote -->
+<script src="{% static 'services/plugins/summernote/summernote-bs4.min.js' %}"></script>
+<!-- overlayScrollbars -->
+<script src="{% static 'services/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
+<!-- FastClick -->
+<script src="{% static 'services/plugins/fastclick/fastclick.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'services/dist/js/adminlte.js' %}"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="{% static 'services/dist/js/pages/dashboard.js' %}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{% static 'services/dist/js/demo.js' %}"></script>
+<!-- DataTables -->
+<script src="{% static 'services/plugins/datatables/jquery.dataTables.js' %}"></script>
+<script src="{% static 'services/plugins/datatables/dataTables.bootstrap4.js' %}"></script>
+
+<!-- page script -->
+<script>
+  $(function () {
+    $("#example1").DataTable();
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+    });
+  });
+</script>
+
+
+</body>
+</html>

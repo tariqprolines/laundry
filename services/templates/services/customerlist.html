@@ -1,0 +1,75 @@
+{%extends 'services/base.html'%}
+{% block container%}
+     <div class="container-fluid">
+       <div class="row mb-2">
+         <div class="col-sm-6">
+           <h1>Customer List</h1>
+         </div>
+         <div class="col-sm-6">
+           <ol class="breadcrumb float-sm-right">
+             <li class="breadcrumb-item"><a href="{% url 'dashboard'%}">Home</a></li>
+             <li class="breadcrumb-item active">Customer List</li>
+           </ol>
+         </div>
+       </div>
+     </div><!-- /.container-fluid -->
+   </section>
+
+   <!-- Main content -->
+   <section class="content">
+     <div class="row">
+       <div class="col-12">
+         <div class="card">
+         <!-- /.card-header -->
+           <div class="card-body">
+             <table id="example1" class="table table-bordered table-striped">
+               <thead>
+               <tr>
+                 <th>Sr. No.</th>
+                 <th>Name</th>
+                 <th>Age (Year)</th>
+                 <th>Sex</th>
+                 <th>Mobile</th>
+                 <th>Created Date</th>
+                 <th>Action</th>
+               </tr>
+               </thead>
+               <tbody>
+              {% for customer in customers %}
+               <tr>
+                 <td>{{forloop.counter}}</td>
+                 <td>{{customer.name}}</td>
+                 <td>{{customer.age}}</td>
+                 <td>{% if customer.sex == 1 %}Male {% else %} Female {%endif%}</td>
+                 <td>{{customer.mobile}}</td>
+                 <td>{{customer.created_date}}</td>
+                 <td>
+                   <a href="{% url 'edit-customer' id=customer.id%}">Edit</a> |
+                   <a href="{% url 'delete-customer' id=customer.id%}" onclick="return confirm('Are you want to delete this customer.')">Delete</a>
+                 </td>
+               </tr>
+               {% endfor %}
+               </tbody>
+               <tfoot>
+               <tr>
+                 <th>Sr. No.</th>
+                 <th>Name</th>
+                 <th>Age</th>
+                 <th>Sex</th>
+                 <th>Mobile</th>
+                 <th>Created Date</th>
+                 <th>Action</th>
+               </tr>
+               </tfoot>
+             </table>
+           </div>
+           <!-- /.card-body -->
+         </div>
+         <!-- /.card -->
+       </div>
+       <!-- /.col -->
+     </div>
+     <!-- /.row -->
+   </section>
+   <!-- /.content -->
+{% endblock %}
