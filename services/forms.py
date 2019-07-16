@@ -1,4 +1,5 @@
 from django import forms
+from bootstrap_datepicker_plus import TimePickerInput
 from .models import Service, Customer, Fuller
 
 class ServiceForms(forms.ModelForm):
@@ -14,9 +15,11 @@ class CustomerForms(forms.ModelForm):
         fields=('name','age','sex','mobile','description')
 
 class FullerForms(forms.ModelForm):
-    from_time=forms.TimeField()
-    to_time=forms.TimeField()
     salary=forms.FloatField(help_text='Salary in USD')
     class Meta:
         model=Fuller
-        fields=('__all__')
+        fields=('name','speciality','salary','days','from_time','to_time')
+        widgets = {
+            'from_time': TimePickerInput().start_of('party time'),
+            'to_time': TimePickerInput().end_of('party time'),
+        }

@@ -30,6 +30,10 @@
 
   <!-- DataTables -->
   <link rel="stylesheet" href="{% static 'services/plugins/datatables/dataTables.bootstrap4.css' %}">
+
+  <!-- Select2 -->
+   <link rel="stylesheet" href="{% static 'services/plugins/select2/css/select2.min.css' %}">
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -372,11 +376,15 @@
 <!-- DataTables -->
 <script src="{% static 'services/plugins/datatables/jquery.dataTables.js' %}"></script>
 <script src="{% static 'services/plugins/datatables/dataTables.bootstrap4.js' %}"></script>
+<!-- Select2 -->
+<script src="{% static 'services/plugins/select2/js/select2.full.min.js' %}"></script>
 
 <!-- page script -->
 <script>
-  $(function () {
-    $("#example1").DataTable();
+  $(document).ready(function(){
+    //Initialize Select2 Elements
+    $('.customer').select2()
+    $('.fuller').select2()
     $('#example2').DataTable({
       "paging": true,
       "lengthChange": false,
