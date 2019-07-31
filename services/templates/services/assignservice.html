@@ -1,9 +1,6 @@
 {%extends 'services/base.html'%}
 {% block container%}
 {% load crispy_forms_tags %}
-{%load static%}
-
-
 <!-- Content Header (Page header) -->
 <div class="content-header">
   <div class="container-fluid">
@@ -54,10 +51,64 @@
                       </select>
                      </div>
                    </div>
-                  <!-- /.card-body -->
+                <!-- table start -->
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="card-body p-0">
+                    <table class="table table-condensed">
+                      <tbody>
+                      <tr>
+                        <th style="width: 15%">#</th>
+                        <th  style="width: 60%">Services</th>
+                        <th style="width:25%">Quantity</th>
+                      </tr>
+                      {% for service in services%}
+                      <tr>
+                        <td style="width: 15%">
+                          <input type="checkbox" onchange="check()" id="assignservice{{service.id}}" class="assignservice" value="assignservice{{service.id}}" name="service[]" />
+                        </td>
+                        <td style="width: 60%">{{service.name}}</td>
+                        <td style="width:25%">
+                          <input type="hidden" name="c{{service.id}}" id="c{{service.id}}" value="{{service.cost}}">
+                          <input type="number" id='q{{service.id}}' name='q{{service.id}}' value='1' onchange="check()" disabled>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody></table>
                   </div>
-                  <div class="card-footer">
-                      <button type="submit" class="btn btn-primary">Add Service</button>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="card-body p-0">
+                    <table class="table table-condensed">
+                      <tbody>
+                      <tr>
+                        <th>Result</th>
+                      </tr>
+                      <tr>
+                        <td><span id="total">0.0</span> USD</td>
+                      </tr>
+                      <tr>
+                        <th>Discount</th>
+                      </tr>
+                      <tr>
+                        <td><input type="text" id="discount" name= "discount" onchange="Mydiscount()" placeholder=" e.g: 100"></td>
+                      </tr>
+                      <tr>
+                        <th>Total</th>
+                      </tr>
+                      <tr>
+                        <td><span id="gtotal">0.00</span> USD</td>
+                      </tr>
+                      <tr>
+                        <td><button type="submit" class="btn btn-primary">Assign Service</button></td>
+                      </tr>
+                    </tbody></table>
+                  </div>
+                  </div>
+                </div>
+
+                   <!-- </table end> -->
+                  <!-- /.card-body -->
                   </div>
               </form>
             </div>
@@ -69,5 +120,56 @@
   </div><!-- /.container-fluid -->
 </section>
 <!-- /.content -->
+{% endblock %}
+{% block javascript %}
+<script>
+    $(document).ready(function(){
+      //Initialize Select2 Elements
+      $('.customer').select2()
+      $('.fuller').select2()
+      $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+      });
+});
+ // Calculate Amount of services
 
+ $('.assignservice').click(function() {
+        var idser=this.id;
+        var a=this.id.slice(13,)
+        var as= $('#assignservice'+a).is(':checked');
+        $('#q'+a).prop('disabled', !(as));
+		});
+
+function check()
+{ var idstr, a, add=0;
+  $('input[type=checkbox]').each(function (){
+     idser = $(this).attr("id");
+     if(typeof idser !== "undefined"){
+       var a=idser.slice(13,)
+       if(document.getElementById('assignservice'+a).checked) {
+       	add += document.getElementById('c'+a).value * document.getElementById('q'+a).value;
+        }
+        var p = add;
+        var price = p;
+        document.getElementById('total').innerHTML = price;
+        document.getElementById('gtotal').innerHTML = price;
+      }
+  });
+}
+
+function Mydiscount(){
+  var grandtotal;
+  var discount=document.getElementById("discount").value;
+  if (discount > 0){
+    var total=document.getElementById("total").innerHTML;
+    grandtotal= parseFloat(total) - parseFloat(discount);
+    document.getElementById('gtotal').innerHTML = grandtotal;
+  }
+}
+</script>
 {% endblock %}

@@ -351,9 +351,6 @@
 <script src="{% static 'services/plugins/chart.js/Chart.min.js' %}"></script>
 <!-- Sparkline -->
 <script src="{% static 'services/plugins/sparklines/sparkline.js '%}"></script>
-<!-- JQVMap -->
-<script src="{% static 'services/plugins/jqvmap/jquery.vmap.min.js' %}"></script>
-<script src="{% static 'services/plugins/jqvmap/maps/jquery.vmap.world.js '%}"></script>
 <!-- jQuery Knob Chart -->
 <script src="{% static 'services/plugins/jquery-knob/jquery.knob.min.js' %}"></script>
 <!-- daterangepicker -->
@@ -379,23 +376,7 @@
 <!-- Select2 -->
 <script src="{% static 'services/plugins/select2/js/select2.full.min.js' %}"></script>
 
-<!-- page script -->
-<script>
-  $(document).ready(function(){
-    //Initialize Select2 Elements
-    $('.customer').select2()
-    $('.fuller').select2()
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-    });
-  });
-</script>
-
+{% block javascript %}{% endblock %}
 
 </body>
 </html>

@@ -136,9 +136,10 @@ def delete_fuller(request,id):
     if delfuller:
         return redirect('fuller-list')
 def assign_service(request):
+    services=Service.objects.all()
     customers=Customer.objects.all()
     fullers=Fuller.objects.all()
-    data={'customers':customers,'fullers':fullers}
+    data={'customers':customers,'fullers':fullers, 'services':services}
     return render(request,'services/assignservice.html',data)
 
 def logout(request):

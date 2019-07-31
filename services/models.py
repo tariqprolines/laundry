@@ -53,9 +53,9 @@ class Assignservice(models.Model):
     fuller=models.ForeignKey(Fuller, on_delete=models.SET_NULL, null=True)
     amount=models.FloatField()
     discount=models.FloatField()
-    assign_date=models.DateField(auto_now_add=True)
+    delivery_date=models.DateField(auto_now_add=True)
 
-class Assignservice_details(models.Model):
+class Assignservice_detail(models.Model):
     id= models.AutoField(primary_key=True)
     service=models.ForeignKey(Service, on_delete=models.SET_NULL, null=True)
     assign=models.ForeignKey(Assignservice, on_delete=models.CASCADE)
