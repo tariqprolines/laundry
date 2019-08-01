@@ -1,6 +1,6 @@
 from django import forms
 from bootstrap_datepicker_plus import TimePickerInput
-from .models import Service, Customer, Fuller
+from .models import Service, Customer, Fuller, Assignservice, Assignservice_detail
 
 class ServiceForms(forms.ModelForm):
     name=forms.CharField(max_length=30,)
@@ -23,3 +23,9 @@ class FullerForms(forms.ModelForm):
             'from_time': TimePickerInput().start_of('party time'),
             'to_time': TimePickerInput().end_of('party time'),
         }
+class AssignServiceForm(forms.ModelForm):
+    class Meta:
+        fields= ('__all__')
+class Assignservice_detailForm(forms.ModelForm):
+    class Meta:
+        fields= ('__all__')

@@ -29,14 +29,14 @@
               <div class="card-header">
                 <h3 class="card-title">Assign Service</h3>
               </div>
-              <form class="" action="{% url 'add-service'%}" method="post">{%csrf_token%}
+              <form class="" action="{% url 'assign-service'%}" method="post">{%csrf_token%}
                  <div class="card-body">
                    <div id="div_id_customer" class="form-group">
                      <label for="id_customer" class="col-form-label  requiredField">Customer Name<span class="asteriskField">*</span> </label>
                      <div class="">
-                       <select class="form-control customer customer-hidden-accessible" style="width: 100%;" data-customer-id="1" tabindex="-1" aria-hidden="true">
+                       <select class="form-control customer customer-hidden-accessible" name="customer_id" style="width: 100%;" data-customer-id="1" tabindex="-1" aria-hidden="true">
                          {% for customer in customers%}
-                        <option selected="selected" data-customer-id="{{customer.id}}">{{customer.name}}</option>
+                        <option selected="selected" data-customer-id="{{customer.id}}" value="{{customer.id}}">{{customer.name}}</option>
                         {% endfor %}
                       </select>
                      </div>
@@ -44,9 +44,9 @@
                    <div id="div_id_fuller" class="form-group">
                      <label for="id_fuller" class="col-form-label  requiredField">Fuller Name<span class="asteriskField">*</span> </label>
                      <div class="">
-                       <select class="form-control fuller fuller-hidden-accessible" style="width: 100%;" data-fuller-id="1" tabindex="-1" aria-hidden="true">
+                       <select class="form-control fuller fuller-hidden-accessible" value="{{fuller.id}}" style="width: 100%;" data-fuller-id="1" tabindex="-1" aria-hidden="true">
                         {% for fuller in fullers%}
-                        <option data-fuller-id="{{fuller.id}}">{{fuller.name}}</option>
+                        <option data-fuller-id="{{fuller.id}}" value="{{fuller.id}}">{{fuller.name}}</option>
                         {% endfor %}
                       </select>
                      </div>
@@ -65,7 +65,7 @@
                       {% for service in services%}
                       <tr>
                         <td style="width: 15%">
-                          <input type="checkbox" onchange="check()" id="assignservice{{service.id}}" class="assignservice" value="assignservice{{service.id}}" name="service[]" />
+                          <input type="checkbox" onchange="check()" id="assignservice{{service.id}}" class="assignservice" value="{{service.id}}" name="service[]" />
                         </td>
                         <td style="width: 60%">{{service.name}}</td>
                         <td style="width:25%">
@@ -82,22 +82,32 @@
                     <table class="table table-condensed">
                       <tbody>
                       <tr>
-                        <th>Result</th>
+                        <th>Total</th>
                       </tr>
                       <tr>
                         <td><span id="total">0.0</span> USD</td>
+                        <input type="hidden" name="totalinput" value="" id="totalinput">
                       </tr>
                       <tr>
                         <th>Discount</th>
                       </tr>
                       <tr>
-                        <td><input type="text" id="discount" name= "discount" onchange="Mydiscount()" placeholder=" e.g: 100"></td>
+                        <td><input type="text" class="form-control" id="discount" name= "discount" onchange="Mydiscount()" placeholder=" e.g: 100"></td>
                       </tr>
                       <tr>
-                        <th>Total</th>
+                        <th>Grand Total</th>
                       </tr>
                       <tr>
                         <td><span id="gtotal">0.00</span> USD</td>
+                        <input type="hidden" name="gtotalinput" value="" id="gtotalinput">
+                      </tr>
+                      <tr>
+                        <th>Delivery Date</th>
+                      </tr>
+                      <tr>
+                        <td>
+                          <input type='text' class="form-control" id='datepicker' name="delivery_date" />
+                        </td>
                       </tr>
                       <tr>
                         <td><button type="submit" class="btn btn-primary">Assign Service</button></td>
@@ -157,7 +167,9 @@ function check()
         var p = add;
         var price = p;
         document.getElementById('total').innerHTML = price;
+        document.getElementById('totalinput').value = price;
         document.getElementById('gtotal').innerHTML = price;
+        document.getElementById('gtotalinput').value = price;
       }
   });
 }
@@ -167,9 +179,26 @@ function Mydiscount(){
   var discount=document.getElementById("discount").value;
   if (discount > 0){
     var total=document.getElementById("total").innerHTML;
+    if(parseFloat(total) > parseFloat(discount)){
     grandtotal= parseFloat(total) - parseFloat(discount);
     document.getElementById('gtotal').innerHTML = grandtotal;
+    document.getElementById('gtotalinput').value = grandtotal;
+    }
+    else{
+      alert('You can not give discount more than total cost.')
+      document.getElementById('gtotal').innerHTML = total;
+      document.getElementById('gtotalinput').value = total;
+    }
+
   }
 }
+$(document).ready(function(){
+  $('#datepicker').datepicker();
+  // $('#datepicker').datepicker({
+  //     format: 'mm/dd/yyyy',
+  //     startDate: '-3d'
+  // });
+});
+
 </script>
 {% endblock %}

@@ -25,4 +25,5 @@ urlpatterns = [
     path('fullerlist', views.fuller_list, name='fuller-list'),
     path('editfuller/<int:id>', views.edit_fuller, name='edit-fuller'),
     path('deletefuller/<int:id>', views.delete_fuller, name='delete-fuller'),
+
 ]

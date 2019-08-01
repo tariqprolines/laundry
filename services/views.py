@@ -2,8 +2,8 @@ from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout as auth_logout
 from django.contrib.auth.decorators import login_required
-from .forms import ServiceForms, CustomerForms, FullerForms
-from .models import Service, Customer, Fuller
+from .forms import ServiceForms, CustomerForms, FullerForms, AssignServiceForm, Assignservice_detailForm
+from .models import Service, Customer, Fuller, Assignservice, Assignservice_detail
 from django.contrib import messages
 
 def index(request):
@@ -140,6 +140,19 @@ def assign_service(request):
     customers=Customer.objects.all()
     fullers=Fuller.objects.all()
     data={'customers':customers,'fullers':fullers, 'services':services}
+    if request.method == 'POST':
+        customer_id=request.POST.get('customer_id')
+        fuller_id=request.POST.get('fuller_id')
+        total=request.POST.get('totalinput')
+        discount=request.POST.get('discount')
+        grandtotal=request.POST.get('gtotalinput')
+        delivery_date=request.POST.get('delivery_date');
+        assignservice=Assignservice(customer_id=customer_id,fuller_id=fuller_id,total=total,discount=discount,grandtotal=grandtotal,delivery_date=delivery_date);
+        # assignservice.save()
+        print(assignservice)
+        assign_service=request.POST.get('service');
+
+
     return render(request,'services/assignservice.html',data)
 
 def logout(request):
