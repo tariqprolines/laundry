@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout as auth_logout
 from django.contrib.auth.decorators import login_required
-from .forms import ServiceForms, CustomerForms, FullerForms, AssignServiceForm, Assignservice_detailForm
+from .forms import ServiceForms, CustomerForms, FullerForms, AssignserviceForm, Assignservice_detailForm
 from .models import Service, Customer, Fuller, Assignservice, Assignservice_detail
 from django.contrib import messages
 
@@ -135,24 +135,30 @@ def delete_fuller(request,id):
     delfuller=Fuller.objects.filter(id=id).delete()
     if delfuller:
         return redirect('fuller-list')
+
 def assign_service(request):
     services=Service.objects.all()
     customers=Customer.objects.all()
     fullers=Fuller.objects.all()
     data={'customers':customers,'fullers':fullers, 'services':services}
     if request.method == 'POST':
+        # assignservice_form=AssignserviceForm(request.POST)
+        # if assignservice_form.is_valid():
+        #     return HttpResponse('Enter')
+        #     assignservice_form.save()
+        # else:
+        #     return HttpResponse('Something')
         customer_id=request.POST.get('customer_id')
         fuller_id=request.POST.get('fuller_id')
-        total=request.POST.get('totalinput')
-        discount=request.POST.get('discount')
-        grandtotal=request.POST.get('gtotalinput')
-        delivery_date=request.POST.get('delivery_date');
+        total=float(request.POST.get('totalinput'))
+        discount=float(request.POST.get('discount'))
+        grandtotal=float(request.POST.get('gtotalinput'))
+        delivery_date=request.POST.get('delivery_date')
         assignservice=Assignservice(customer_id=customer_id,fuller_id=fuller_id,total=total,discount=discount,grandtotal=grandtotal,delivery_date=delivery_date);
-        # assignservice.save()
-        print(assignservice)
+        assignservice.save(commit=False)
         assign_service=request.POST.get('service');
-
-
+    # else:
+    #     assignservice_form=AssignServiceForm()
     return render(request,'services/assignservice.html',data)
 
 def logout(request):

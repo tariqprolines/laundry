@@ -44,7 +44,7 @@
                    <div id="div_id_fuller" class="form-group">
                      <label for="id_fuller" class="col-form-label  requiredField">Fuller Name<span class="asteriskField">*</span> </label>
                      <div class="">
-                       <select class="form-control fuller fuller-hidden-accessible" value="{{fuller.id}}" style="width: 100%;" data-fuller-id="1" tabindex="-1" aria-hidden="true">
+                       <select class="form-control fuller fuller-hidden-accessible" name="fuller_id" style="width: 100%;" data-fuller-id="1" tabindex="-1" aria-hidden="true">
                         {% for fuller in fullers%}
                         <option data-fuller-id="{{fuller.id}}" value="{{fuller.id}}">{{fuller.name}}</option>
                         {% endfor %}
@@ -193,11 +193,9 @@ function Mydiscount(){
   }
 }
 $(document).ready(function(){
-  $('#datepicker').datepicker();
-  // $('#datepicker').datepicker({
-  //     format: 'mm/dd/yyyy',
-  //     startDate: '-3d'
-  // });
+  $('#datepicker').datepicker({
+      dateFormat: "yy-mm-dd"
+  });
 });
 
 </script>

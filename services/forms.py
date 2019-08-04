@@ -23,9 +23,12 @@ class FullerForms(forms.ModelForm):
             'from_time': TimePickerInput().start_of('party time'),
             'to_time': TimePickerInput().end_of('party time'),
         }
-class AssignServiceForm(forms.ModelForm):
+class AssignserviceForm(forms.ModelForm):
     class Meta:
+        model=Assignservice
         fields= ('__all__')
+        # fields= ('customer','fuller','total','discount','grandtotal','delivery_date')
+
 class Assignservice_detailForm(forms.ModelForm):
     class Meta:
         fields= ('__all__')
