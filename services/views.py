@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.contrib.auth.models import User
+from django.utils import timezone as tz
 from django.contrib.auth import login, authenticate, logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from .forms import ServiceForms, CustomerForms, FullerForms, AssignserviceForm, Assignservice_detailForm
@@ -81,7 +82,7 @@ def customer_list(request):
 
 @login_required(login_url='/')
 def edit_customer(request,id):
-    obj=Customer.objects.filter(id=id).first()
+    obj=Customer.objects.filter(id=id).first() #  get single objects
     if request.method == 'POST':
         edit_form = CustomerForms(request.POST,instance=obj)
         if edit_form.is_valid():
@@ -119,7 +120,7 @@ def fuller_list(request):
 
 @login_required(login_url='/')
 def edit_fuller(request,id):
-    obj=Fuller.objects.filter(id=id).first()
+    obj=Fuller.objects.filter(id=id).first() # get single objects
     if request.method == 'POST':
         edit_form= FullerForms(request.POST, instance=obj)
         if edit_form.is_valid():
@@ -136,30 +137,57 @@ def delete_fuller(request,id):
     if delfuller:
         return redirect('fuller-list')
 
+@login_required(login_url='/')
 def assign_service(request):
     services=Service.objects.all()
     customers=Customer.objects.all()
     fullers=Fuller.objects.all()
     data={'customers':customers,'fullers':fullers, 'services':services}
     if request.method == 'POST':
-        # assignservice_form=AssignserviceForm(request.POST)
-        # if assignservice_form.is_valid():
-        #     return HttpResponse('Enter')
-        #     assignservice_form.save()
-        # else:
-        #     return HttpResponse('Something')
         customer_id=request.POST.get('customer_id')
         fuller_id=request.POST.get('fuller_id')
-        total=float(request.POST.get('totalinput'))
-        discount=float(request.POST.get('discount'))
-        grandtotal=float(request.POST.get('gtotalinput'))
+        total=request.POST.get('totalinput')
+        discount=request.POST.get('discount')
+        grandtotal=request.POST.get('gtotalinput')
         delivery_date=request.POST.get('delivery_date')
         assignservice=Assignservice(customer_id=customer_id,fuller_id=fuller_id,total=total,discount=discount,grandtotal=grandtotal,delivery_date=delivery_date);
-        assignservice.save(commit=False)
-        assign_service=request.POST.get('service');
-    # else:
-    #     assignservice_form=AssignServiceForm()
+        assignservice.save()
+        assign_service=request.POST.getlist('service[]')
+        id = Assignservice.objects.latest('id') # get last inserted id
+        assign_id=id.id
+        status=False
+        for i in assign_service:
+            print(assign_id)
+            service_id=i
+            quantity=request.POST.get('q'+i)
+            assignervice_detail=Assignservice_detail(service_id=service_id,quantity=quantity,assign_id=assign_id)
+            assignervice_detail.save()
+            status=True
+        if status==True:
+            messages.success(request, 'Assign services successfully to customer.')
+        else:
+            message.error('Somethong Wrong.')
+
     return render(request,'services/assignservice.html',data)
+
+@login_required(login_url='/')
+def invoice_list(request):
+    assign_services=Assignservice.objects.all()
+    return render(request,'services/invoicelist.html',{'assign_services':assign_services})
+
+@login_required(login_url='/')
+def view_invoice(request,id):
+    assign_services=Assignservice.objects.filter(id=id)
+    today_date=tz.now();
+    assign_service_details=Assignservice_detail.objects.filter(assign_id=id)
+    # return HttpResponse(assign_service_details)
+    return render(request,'services/viewinvoice.html',{'assign_services':assign_services,'today_date':today_date,'assign_service_details':assign_service_details})
+
+@login_required(login_url='/')
+def delete_invoice(request,id):
+    delassignservice=Assignservice.objects.filter(id=id).delete()
+    if delassignservice:
+        return redirect('invoice-list')
 
 def logout(request):
     auth_logout(request)

@@ -12,18 +12,23 @@ urlpatterns = [
     path('editservice/<int:id>', views.edit_service, name='edit-service'),
     path('deleteservice/<int:id>', views.delete_service, name='delete-service'),
 
-    # Customer View
+    # Customer Views
     path('addcustomer', views.add_customer, name='add-customer'),
     path('customerlist', views.customer_list, name='customer-list'),
     path('editcustomer/<int:id>', views.edit_customer, name='edit-customer'),
     path('deletecustomer/<int:id>', views.delete_customer, name='delete-customer'),
     path('assignservice', views.assign_service, name='assign-service'),
 
-    # Fuller View
+    # Fuller Views
 
     path('addfuller', views.add_fuller, name='add-fuller'),
     path('fullerlist', views.fuller_list, name='fuller-list'),
     path('editfuller/<int:id>', views.edit_fuller, name='edit-fuller'),
     path('deletefuller/<int:id>', views.delete_fuller, name='delete-fuller'),
+
+    # Invice Views
+    path('invoicelist', views.invoice_list, name='invoice-list'),
+    path('viewinvoice/<int:id>', views.view_invoice, name='view-invoice'),
+    path('deleteinvoice/<int:id>', views.delete_invoice, name='delete-invoice'),
 
 ]

@@ -51,9 +51,9 @@ class Assignservice(models.Model):
     id= models.AutoField(primary_key=True)
     customer=models.ForeignKey(Customer,on_delete=models.CASCADE)
     fuller=models.ForeignKey(Fuller, on_delete=models.SET_NULL, null=True)
-    total=models.FloatField(null=True)
-    discount=models.FloatField(null=True)
-    grandtotal=models.FloatField(null=True)
+    total=models.CharField(max_length=100, null=True)
+    discount=models.CharField(max_length=100, null=True)
+    grandtotal=models.CharField(max_length=100,null=True)
     delivery_date=models.DateField(null=True)
 
 class Assignservice_detail(models.Model):
