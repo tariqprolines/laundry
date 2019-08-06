@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'services.apps.ServicesConfig',#new
     'crispy_forms',
     'multiselectfield',
+    'mathfilters',
     'bootstrap_datepicker_plus',
 ]
 

@@ -172,7 +172,7 @@ def assign_service(request):
 
 @login_required(login_url='/')
 def invoice_list(request):
-    assign_services=Assignservice.objects.all()
+    assign_services=Assignservice.objects.all().order_by('-id')
     return render(request,'services/invoicelist.html',{'assign_services':assign_services})
 
 @login_required(login_url='/')
@@ -180,7 +180,6 @@ def view_invoice(request,id):
     assign_services=Assignservice.objects.filter(id=id)
     today_date=tz.now();
     assign_service_details=Assignservice_detail.objects.filter(assign_id=id)
-    # return HttpResponse(assign_service_details)
     return render(request,'services/viewinvoice.html',{'assign_services':assign_services,'today_date':today_date,'assign_service_details':assign_service_details})
 
 @login_required(login_url='/')
