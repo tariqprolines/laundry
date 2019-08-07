@@ -38,7 +38,7 @@ def add_service(request):
 
 @login_required(login_url='/')
 def service_list(request):
-    services=Service.objects.all()
+    services=Service.objects.all().order_by('-id')
     return render(request,'services/servicelist.html',{'services':services})
 
 @login_required(login_url='/')
@@ -77,7 +77,7 @@ def add_customer(request):
 
 @login_required(login_url='/')
 def customer_list(request):
-    customers=Customer.objects.all()
+    customers=Customer.objects.all().order_by('-id')
     return render(request,'services/customerlist.html',{'customers':customers})
 
 @login_required(login_url='/')
@@ -115,7 +115,7 @@ def add_fuller(request):
 
 @login_required(login_url='/')
 def fuller_list(request):
-    fullers= Fuller.objects.all()
+    fullers= Fuller.objects.all().order_by('-id')
     return render(request,'services/fullerlist.html',{'fullers':fullers})
 
 @login_required(login_url='/')

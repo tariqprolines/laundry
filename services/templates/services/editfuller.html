@@ -1,6 +1,10 @@
 {%extends 'services/base.html'%}
 {% block container%}
 {% load crispy_forms_tags %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ edit_form.media }}            {# Adds date-picker required JS and CSS #}
 <!-- Content Header (Page header) -->
 <div class="content-header">
   <div class="container-fluid">

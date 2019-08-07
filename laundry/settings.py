@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'multiselectfield',
     'mathfilters',
+    'bootstrap4',
     'bootstrap_datepicker_plus',
 ]
 
@@ -145,3 +146,8 @@ MESSAGE_TAGS = {
 # set crispy from
 
 CRISPY_TEMPLATE_PACK ='bootstrap4'
+
+# Using Bootstrap
+BOOTSTRAP4 = {
+    'include_jquery': True,
+}

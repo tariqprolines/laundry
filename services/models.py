@@ -39,8 +39,8 @@ class Fuller(models.Model):
     name=models.CharField(max_length=30, null=True)
     speciality=models.CharField(max_length=30, null=True)
     salary=models.FloatField()
-    from_time=models.TimeField(auto_now=False, auto_now_add=False)
-    to_time=models.TimeField(auto_now=False, auto_now_add=False)
+    from_time=models.TimeField()
+    to_time=models.TimeField()
     days = MultiSelectField(choices=Days_CHOICES)
     created_date=models.DateField(auto_now_add=True)
 

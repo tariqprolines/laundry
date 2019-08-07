@@ -99,9 +99,8 @@ function printDiv(){
   var printButton = document.getElementById("printpagebutton");
   //Set the button visibility to 'hidden'
   printButton.style.visibility = 'hidden';
-document.getElementById("output").style.color = 'black';
   var data=document.getElementById('myDiv').innerHTML;
-
+  // $("#output").css("cssText", "background: #343a40 !important;");
   var myWindow = window.open('', 'myDiv', 'height=400,width=600');
            myWindow.document.write('<html><head><title></title>');
            /*optional stylesheet*/
@@ -112,7 +111,6 @@ document.getElementById("output").style.color = 'black';
            myWindow.document.close(); // necessary for IE >= 10
 
            myWindow.onload=function(){ // necessary if the div contain images
-
                myWindow.focus(); // necessary for IE >= 10
                myWindow.print();
                //Restore button visibility
